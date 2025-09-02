@@ -9,14 +9,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- Chosen Palette: Modern Slate -->
-    <!-- Application Structure Plan: Se ha diseñado una SPA con un enfoque de portfolio/dashboard. La estructura es: 1. Encabezado de alto impacto con resumen profesional. 2. Navegación fija para acceso rápido. 3. Sección de 'Habilidades Clave' con un gráfico de radar interactivo para una visualización rápida de competencias. 4. 'Experiencia' como una línea de tiempo vertical interactiva, donde los detalles de cada rol se expanden al hacer clic. 5. Secciones finales para 'Educación' e 'Idiomas'. Se ha removido la sección de IA y en su lugar se ha integrado la nueva habilidad en desarrollo de prompts en las habilidades clave, lo cual mejora la coherencia del diseño. Esta estructura transforma el CV lineal en una experiencia de descubrimiento, permitiendo a los reclutadores enfocarse en las áreas de mayor interés de forma no lineal, lo cual es más eficiente y atractivo. -->
-    <!-- Visualization & Content Choices: 
-        - Habilidades Clave -> Goal: Organizar/Comparar -> Viz: Gráfico de Radar (Chart.js) -> Interaction: Tooltips al pasar el mouse -> Justification: Muestra un perfil de habilidades balanceado y multifacético, ideal para un rol de liderazgo en marketing. Es más impactante que una lista. La habilidad de "Desarrollo de Prompts para IA" se añade a la lista y se integra en el gráfico.
-        - Experiencia Laboral -> Goal: Mostrar cambio/progresión -> Viz: Línea de tiempo vertical (HTML/Tailwind) -> Interaction: Paneles expandibles con clic (JS) -> Justification: Presenta la trayectoria profesional de forma clara y ordenada, evitando un bloque de texto largo y permitiendo al usuario profundizar en los roles que más le interesen.
-        - Resto del Contenido -> Goal: Informar -> Viz: Tarjetas de texto estilizadas (HTML/Tailwind) -> Interaction: Ninguna -> Justification: Presentación limpia y directa para información de soporte.
-    -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -48,7 +40,7 @@
         .bg-cyan-500{
             background-color: #E85234!important;
         }
-        .menu{
+        #inicio{
             background-color: #F9B6AF;
         }
         header nav h1,#mg{
@@ -63,7 +55,7 @@
 <body class="bg-slate-50 text-slate-800">
 
     <header id="inicio" class="bg-white shadow-sm sticky top-0 z-50">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center menu">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center" style="width: 100%; overflow: hidden;">
             <h1 id="MG" class="text-xl md:text-2xl font-bold">Melina Gonzalez</h1>
             <ul class="hidden md:flex space-x-8">
                 <li><a href="#experiencia" class="text-slate-600 hover:text-cyan-600 transition">Experiencia</a></li>
@@ -241,7 +233,7 @@
     <footer class="text-white mt-20">
         <div class="container mx-auto px-6 py-8 text-center">
             <h4 class="text-2xl font-bold mb-4">Contacto</h4>
-            <p class="mb-2">+54 9 11 2296 4707</p>
+            <p class="mb-2"><a href="https://wa.me/5491122964707">+54 9 11 2296 4707</a></p>
             <p>melina17delrosario@gmail.com</p>
         </div>
     </footer>
@@ -296,7 +288,7 @@
                                 max: 5,
                                 stepSize: 1,
                                 backdropColor: 'rgba(255, 255, 255, 0.75)',
-                                color: '#64748b'
+                                color: 'rgba(255, 255, 255, 0'
                             }
                         }
                     },
