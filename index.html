@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Interactivo - Melina Gonzalez</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Modern Slate -->
+    <!-- Application Structure Plan: Se ha diseñado una SPA con un enfoque de portfolio/dashboard. La estructura es: 1. Encabezado de alto impacto con resumen profesional. 2. Navegación fija para acceso rápido. 3. Sección de 'Habilidades Clave' con un gráfico de radar interactivo para una visualización rápida de competencias. 4. 'Experiencia' como una línea de tiempo vertical interactiva, donde los detalles de cada rol se expanden al hacer clic. 5. Secciones finales para 'Educación' e 'Idiomas'. Se ha removido la sección de IA y en su lugar se ha integrado la nueva habilidad en desarrollo de prompts en las habilidades clave, lo cual mejora la coherencia del diseño. Esta estructura transforma el CV lineal en una experiencia de descubrimiento, permitiendo a los reclutadores enfocarse en las áreas de mayor interés de forma no lineal, lo cual es más eficiente y atractivo. -->
+    <!-- Visualization & Content Choices: 
+        - Habilidades Clave -> Goal: Organizar/Comparar -> Viz: Gráfico de Radar (Chart.js) -> Interaction: Tooltips al pasar el mouse -> Justification: Muestra un perfil de habilidades balanceado y multifacético, ideal para un rol de liderazgo en marketing. Es más impactante que una lista. La habilidad de "Desarrollo de Prompts para IA" se añade a la lista y se integra en el gráfico.
+        - Experiencia Laboral -> Goal: Mostrar cambio/progresión -> Viz: Línea de tiempo vertical (HTML/Tailwind) -> Interaction: Paneles expandibles con clic (JS) -> Justification: Presenta la trayectoria profesional de forma clara y ordenada, evitando un bloque de texto largo y permitiendo al usuario profundizar en los roles que más le interesen.
+        - Resto del Contenido -> Goal: Informar -> Viz: Tarjetas de texto estilizadas (HTML/Tailwind) -> Interaction: Ninguna -> Justification: Presentación limpia y directa para información de soporte.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            margin: auto;
+            height: 40vh;
+            width: 80vw;
+            max-width: 500px;
+            max-height: 500px;
+        }
+        .timeline-item-content {
+            transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        .timeline-item-content.open {
+            max-height: 1000px;
+            opacity: 1;
+        }
+        Ul li a:hover{
+            color: #E85234!important;
+        }
+        .text-cyan-600{
+             color: #F9B6AF!important;
+        }
+        .bg-cyan-500{
+            background-color: #E85234!important;
+        }
+        .menu{
+            background-color: #F9B6AF;
+        }
+        header nav h1,#mg{
+            color: #E85234!important;
+        }
+        footer{
+            background-color: #E85234;
+        }
+      
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <header id="inicio" class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center menu">
+            <h1 id="MG" class="text-xl md:text-2xl font-bold">Melina Gonzalez</h1>
+            <ul class="hidden md:flex space-x-8">
+                <li><a href="#experiencia" class="text-slate-600 hover:text-cyan-600 transition">Experiencia</a></li>
+                <li><a href="#habilidades" class="text-slate-600 hover:text-cyan-600 transition">Habilidades</a></li>
+                <li><a href="#conocimientos" class="text-slate-600 hover:text-cyan-600 transition">Conocimientos técnicos</a></li>
+                <li><a href="#educacion" class="text-slate-600 hover:text-cyan-600 transition">Educación</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-12 md:py-20">
+        <div id="Presentacion" style="background-image: url(./bg.png); padding: 3em; background-position: center; background-repeat: no-repeat; background-size: auto; vertical-align: middle; margin: auto;">
+             <section class="text-center mb-16 md:mb-24" style="background-color:rgba(242, 215, 211, .7); padding: 2em; opacity: 1!important;">
+            <h2 class="text-3xl md:text-5xl font-bold mb-4">Designer & Head of Marketing</h2>
+            <p class="max-w-3xl mx-auto text-slate-600 md:text-lg">
+                Profesional autónoma y comprometida, con una sólida experiencia en diseño y marketing. Mi enfoque se centra en la planificación y ejecución de estrategias que optimizan la imagen de marca y generan resultados comerciales tangibles. Poseo excelentes habilidades de comunicación y me destaco en el trabajo colaborativo, liderando equipos y coordinando proyectos para alcanzar los objetivos de la empresa.
+            </p>
+        </section>
+        </div>
+       
+
+        <hr class="my-16 border-slate-200">
+
+        <section id="habilidades" class="mb-16 md:mb-24">
+            <h3 class="text-3xl font-bold text-center mb-4">Habilidades Clave</h3>
+            <p class="text-center text-slate-500 mb-12">Un vistazo a mis competencias principales en estrategia, gestión y ejecución.</p>
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+                <div class="chart-container">
+                    <canvas id="skillsChart"></canvas>
+                </div>
+            </div>
+        </section>
+        <section id="conocimientos" class="mb-16 md:mb-24">
+            <h3 class="text-3xl font-bold text-center mb-8">Conocimientos Técnicos</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-4xl mx-auto text-center">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <span class="text-4xl">🎨</span>
+                    <h4 class="font-bold text-xl mt-2 mb-1">Paquete Adobe</h4>
+                    <p class="text-slate-600">Illustrator, Photoshop, After Effects, Premiere</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <span class="text-4xl">📄</span>
+                    <h4 class="font-bold text-xl mt-2 mb-1">Paquete Office</h4>
+                    <p class="text-slate-600">Word, Excel, PowerPoint</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <span class="text-4xl">📧</span>
+                    <h4 class="font-bold text-xl mt-2 mb-1">Google Workspace</h4>
+                    <p class="text-slate-600">Gmail, Drive, Docs, Sheets, Slides</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <span class="text-4xl">🤖</span>
+                    <h4 class="font-bold text-xl mt-2 mb-1">IA y Prompts</h4>
+                    <p class="text-slate-600">Desarrollo de prompts para Chat GPT y Gemini</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <span class="text-4xl">🛒</span>
+                    <h4 class="font-bold text-xl mt-2 mb-1">Comercio Digital</h4>
+                    <p class="text-slate-600">Gestión de Mercado Libre, ERP Netsuite Oracle</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <span class="text-4xl">📈</span>
+                    <h4 class="font-bold text-xl mt-2 mb-1">Marketing Digital</h4>
+                    <p class="text-slate-600">Meta Ads, Google Ads, CRM (Emblue, Salesforce, Netsuite)</p>
+                </div>
+            </div>
+        </section>
+
+        <hr class="my-16 border-slate-200">
+
+        <section id="experiencia">
+            <h3 class="text-3xl font-bold text-center mb-12">Experiencia Laboral</h3>
+            <div class="relative max-w-3xl mx-auto">
+                <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-slate-200"></div>
+                
+                <div class="timeline-item mb-12">
+                    <div class="flex items-center">
+                        <div class="flex-1 text-right pr-8">
+                            <h4 class="font-bold text-lg">HEAD OF MARKETING</h4>
+                            <p class="text-slate-600">Radio Sapienza</p>
+                        </div>
+                        <div class="w-8 h-8 bg-cyan-500 rounded-full z-10 flex items-center justify-center text-white font-bold">1</div>
+                        <div class="flex-1 pl-8">
+                            <p class="text-slate-500 font-medium">Marzo 2025 - Actualidad</p>
+                        </div>
+                    </div>
+                    <div class="text-center mt-2">
+                         <button class="toggle-details-btn text-cyan-600 hover:underline text-sm font-semibold">Ver detalles ▼</button>
+                    </div>
+                    <div class="timeline-item-content mt-4 max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md">
+                        <ul class="list-disc list-inside text-slate-700 space-y-2">
+                            <li>Responsable de la imagen de marca en sucursales físicas y canales digitales.</li>
+                            <li>Liderazgo en la reestructuración de la cartelería y la implementación de una nueva señalética de precios.</li>
+                            <li>Definición e implementación de un circuito de experiencia del cliente y encuestas de salida.</li>
+                            <li>Realización de benchmarking de competencia para adaptar y mejorar estrategias.</li>
+                            <li>Medición y establecimiento de KPIs de posicionamiento de marca.</li>
+                            <li>Gestión del presupuesto de marketing interno y externo, incluyendo campañas comerciales.</li>
+                            <li>Coordinación de un equipo multidisciplinario con gerentes y equipos de diseño.</li>
+                            <li>Creación de campañas de marketing 360 para eventos clave del retail y liquidación de productos.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item mb-12">
+                    <div class="flex items-center">
+                        <div class="flex-1 text-right pr-8">
+                             <p class="text-slate-500 font-medium">Junio 2022 - Marzo 2025</p>
+                        </div>
+                        <div class="w-8 h-8 bg-cyan-500 rounded-full z-10 flex items-center justify-center text-white font-bold">2</div>
+                        <div class="flex-1 pl-8">
+                            <h4 class="font-bold text-lg">COORDINADORA DE MKT</h4>
+                            <p class="text-slate-600">Soca Argentina SA</p>
+                        </div>
+                    </div>
+                     <div class="text-center mt-2">
+                         <button class="toggle-details-btn text-cyan-600 hover:underline text-sm font-semibold">Ver detalles ▼</button>
+                    </div>
+                    <div class="timeline-item-content mt-4 max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md">
+                        <ul class="list-disc list-inside text-slate-700 space-y-2">
+                            <li>Gestión de puntos de venta B2B y B2C, y planificación de eventos empresariales.</li>
+                            <li>Participación en el desarrollo de nuevas marcas y lanzamiento de productos.</li>
+                            <li>Análisis de KPIs de cartera de clientes y desarrollo de estrategias de marketing.</li>
+                            <li>Propuesta y ejecución de campañas en colaboración con el equipo comercial.</li>
+                            <li>Comunicación y coordinación estratégica con la agencia de Mercado Libre.</li>
+                            <li>Gestión y diseño de redes sociales, diseño web, y material publicitario.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="flex items-center">
+                        <div class="flex-1 text-right pr-8">
+                            <h4 class="font-bold text-lg">DISEÑADORA MULTIMEDIA</h4>
+                            <p class="text-slate-600">T3H</p>
+                        </div>
+                        <div class="w-8 h-8 bg-cyan-500 rounded-full z-10 flex items-center justify-center text-white font-bold">3</div>
+                        <div class="flex-1 pl-8">
+                            <p class="text-slate-500 font-medium">Mayo 2021 - Junio 2022</p>
+                        </div>
+                    </div>
+                     <div class="text-center mt-2">
+                         <button class="toggle-details-btn text-cyan-600 hover:underline text-sm font-semibold">Ver detalles ▼</button>
+                    </div>
+                    <div class="timeline-item-content mt-4 max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md">
+                        <ul class="list-disc list-inside text-slate-700 space-y-2">
+                            <li>Creación de Motion Graphics y banners web.</li>
+                            <li>Composición de Key Visuals para campañas de marketing.</li>
+                            <li>Desarrollo de piezas estáticas y animadas.</li>
+                            <li>Maquetación de campañas de mailing.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <hr class="my-16 border-slate-200">
+        
+        <section id="educacion" class="text-center mb-16 md:mb-24">
+            <h3 class="text-3xl font-bold mb-8">Educación e Idiomas</h3>
+            <div class="flex flex-col md:flex-row justify-center items-center gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md w-full md:w-1/3">
+                    <h4 class="font-bold text-cyan-600 mb-2">DISEÑO MULTIMEDIAL</h4>
+                    <p class="text-slate-700">Escuela Da Vinci</p>
+                    <p class="text-sm text-slate-500">2017 - 2020</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md w-full md:w-1/3">
+                    <h4 class="font-bold text-cyan-600 mb-2">INGLÉS</h4>
+                    <p class="text-slate-700">Intermedio Avanzado (B2)</p>
+                    <p class="text-sm text-slate-500">En proceso de certificación</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="text-white mt-20">
+        <div class="container mx-auto px-6 py-8 text-center">
+            <h4 class="text-2xl font-bold mb-4">Contacto</h4>
+            <p class="mb-2">+54 9 11 2296 4707</p>
+            <p>melina17delrosario@gmail.com</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const ctx = document.getElementById('skillsChart').getContext('2d');
+            const skillsChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: [
+                        'Estrategia de Marca', 
+                        'Liderazgo de Equipos', 
+                        'Gestión de Presupuestos', 
+                        'Análisis de KPI', 
+                        'Marketing Digital', 
+                        'Manejo de CRM', 
+                        'Diseño Gráfico',
+                        'Desarrollo de Prompts para IA'
+                    ],
+                    datasets: [{
+                        label: 'Nivel',
+                        data: [5, 4.8, 4.7, 5, 5, 4.7, 5, 4.7],
+                        backgroundColor: 'rgba(249, 182, 175, .5)',
+                        borderColor: 'rgba(150, 173, 214, 1)',
+                        pointBackgroundColor: 'rgba(0, 64, 140, 1)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgba(14, 165, 233, 1)'
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    responsive: true,
+                    scales: {
+                        r: {
+                            angleLines: {
+                                color: 'rgba(0, 0, 0, 0.1)'
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.1)'
+                            },
+                            pointLabels: {
+                                font: {
+                                    size: 12,
+                                    weight: 'bold'
+                                },
+                                color: '#E85234'
+                            },
+                            ticks: {
+                                beginAtZero: true,
+                                max: 5,
+                                stepSize: 1,
+                                backdropColor: 'rgba(255, 255, 255, 0.75)',
+                                color: '#64748b'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+
+            const toggleButtons = document.querySelectorAll('.toggle-details-btn');
+            toggleButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.parentElement.nextElementSibling;
+                    const isOpening = !content.classList.contains('open');
+                    
+                    document.querySelectorAll('.timeline-item-content.open').forEach(openContent => {
+                        openContent.classList.remove('open');
+                        const openButton = openContent.previousElementSibling.querySelector('.toggle-details-btn');
+                        openButton.textContent = 'Ver detalles ▼';
+                    });
+
+                    if (isOpening) {
+                        content.classList.add('open');
+                        button.textContent = 'Ocultar detalles ▲';
+                    } else {
+                         button.textContent = 'Ver detalles ▼';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
