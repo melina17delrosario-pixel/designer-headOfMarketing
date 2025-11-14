@@ -49,27 +49,24 @@
         footer{
             background-color: #E85234;
         }
-      /* Nuevo CSS para el efecto Masonry Grid (simulado con columnas) */
-.column-layout {
-    column-count: 1; /* Disposición de 1 columna por defecto */
-    column-gap: 1.5rem; /* Espacio entre columnas */
-}
-@media (min-width: 640px) { /* sm */
-    .column-layout { column-count: 2; }
-}
-@media (min-width: 1024px) { /* lg */
-    .column-layout { column-count: 3; }
-}
-
-/* El elemento break-inside-avoid (Tailwind) es crucial para evitar que los items se rompan entre columnas */
-
-/* Estilo para el botón de cierre del Pop-up */
-#modal-close {
-    /* Mueve el botón de cierre para que esté sobre el contenido del modal */
-    right: 1rem;
-    top: 1rem;
-    z-index: 10;
-}
+        /* Masonry Grid */
+        .column-layout {
+            column-count: 1;
+            column-gap: 1.5rem;
+        }
+        @media (min-width: 640px) { .column-layout { column-count: 2; } }
+        @media (min-width: 1024px) { .column-layout { column-count: 3; } }
+        /* Modal Close Button */
+        #modal-close {
+            right: 1rem;
+            top: 1rem;
+            z-index: 10;
+        }
+        /* Language Switcher Active State */
+        #lang-switcher button.active {
+            opacity: 1;
+            font-weight: 700;
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800">
@@ -78,30 +75,34 @@
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center" style="width: 100%; overflow: hidden;">
             <h1 id="MG" class="text-xl md:text-2xl font-bold">Melina Gonzalez</h1>
             <ul class="hidden md:flex space-x-8">
-                <li><a href="#experiencia" class="text-slate-600 hover:text-cyan-600 transition">Experiencia</a></li>
-                <li><a href="#habilidades" class="text-slate-600 hover:text-cyan-600 transition">Habilidades</a></li>
-                <li><a href="#conocimientos" class="text-slate-600 hover:text-cyan-600 transition">Conocimientos técnicos</a></li>
-                <li><a href="#educacion" class="text-slate-600 hover:text-cyan-600 transition">Educación</a></li>
+                <li><a href="#experiencia" class="text-slate-600 hover:text-cyan-600 transition" data-translate="navExperience">Experiencia</a></li>
+                <li><a href="#habilidades" class="text-slate-600 hover:text-cyan-600 transition" data-translate="navSkills">Habilidades</a></li>
+                <li><a href="#portfolio" class="text-slate-600 hover:text-cyan-600 transition" data-translate="navPortfolio">Portafolio</a></li>
+                <li><a href="#conocimientos" class="text-slate-600 hover:text-cyan-600 transition" data-translate="navTech">Conocimientos técnicos</a></li>
+                <li><a href="#educacion" class="text-slate-600 hover:text-cyan-600 transition" data-translate="navEducation">Educación</a></li>
             </ul>
+            <div id="lang-switcher" class="ml-8 flex space-x-4">
+                <button data-lang="es" class="text-slate-700 opacity-70 hover:opacity-100 transition active">ES</button>
+                <button data-lang="en" class="text-slate-700 opacity-70 hover:opacity-100 transition">EN</button>
+            </div>
         </nav>
     </header>
 
     <main class="container mx-auto px-6 py-12 md:py-20">
         <div id="Presentacion" style="background-image: url(./bg.png); padding: 3em; background-position: center; background-repeat: no-repeat; background-size: auto; vertical-align: middle; margin: auto;">
-             <section class="text-center mb-16 md:mb-24" style="background-color:rgba(242, 215, 211, .7); padding: 2em; opacity: 1!important;">
-            <h2 class="text-3xl md:text-5xl font-bold mb-4">Designer & Head of Marketing</h2>
-            <p class="max-w-3xl mx-auto text-slate-600 md:text-lg">
+              <section class="text-center mb-16 md:mb-24" style="background-color:rgba(242, 215, 211, .7); padding: 2em; opacity: 1!important;">
+            <h2 class="text-3xl md:text-5xl font-bold mb-4" data-translate="heroTitle">Designer & Head of Marketing</h2>
+            <p class="max-w-3xl mx-auto text-slate-600 md:text-lg" data-translate="heroBio">
                 Profesional autónoma y comprometida, con una sólida experiencia en diseño y marketing. Mi enfoque se centra en la planificación y ejecución de estrategias que optimizan la imagen de marca y generan resultados comerciales tangibles. Poseo excelentes habilidades de comunicación y me destaco en el trabajo colaborativo, liderando equipos y coordinando proyectos para alcanzar los objetivos de la empresa.
             </p>
         </section>
         </div>
-       
-
+        
         <hr class="my-16 border-slate-200">
 
         <section id="habilidades" class="mb-16 md:mb-24">
-            <h3 class="text-3xl font-bold text-center mb-4">Habilidades Clave</h3>
-            <p class="text-center text-slate-500 mb-12">Un vistazo a mis competencias principales en estrategia, gestión y ejecución.</p>
+            <h3 class="text-3xl font-bold text-center mb-4" data-translate="skillsTitle">Habilidades Clave</h3>
+            <p class="text-center text-slate-500 mb-12" data-translate="skillsSubtitle">Un vistazo a mis competencias principales en estrategia, gestión y ejecución.</p>
             <div class="bg-white p-6 rounded-xl shadow-lg">
                 <div class="chart-container">
                     <canvas id="skillsChart"></canvas>
@@ -109,37 +110,37 @@
             </div>
         </section>
         <section id="conocimientos" class="mb-16 md:mb-24">
-            <h3 class="text-3xl font-bold text-center mb-8">Conocimientos Técnicos</h3>
+            <h3 class="text-3xl font-bold text-center mb-8" data-translate="techTitle">Conocimientos Técnicos</h3>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-4xl mx-auto text-center">
                 <div class="bg-white p-6 rounded-lg shadow-md">
                     <span class="text-4xl">🎨</span>
-                    <h4 class="font-bold text-xl mt-2 mb-1">Paquete Adobe</h4>
-                    <p class="text-slate-600">Illustrator, Photoshop, After Effects, Premiere</p>
+                    <h4 class="font-bold text-xl mt-2 mb-1" data-translate="techAdobe">Paquete Adobe</h4>
+                    <p class="text-slate-600" data-translate="techAdobeDesc">Illustrator, Photoshop, After Effects, Premiere</p>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-md">
                     <span class="text-4xl">📄</span>
-                    <h4 class="font-bold text-xl mt-2 mb-1">Paquete Office</h4>
-                    <p class="text-slate-600">Word, Excel, PowerPoint</p>
+                    <h4 class="font-bold text-xl mt-2 mb-1" data-translate="techOffice">Paquete Office</h4>
+                    <p class="text-slate-600" data-translate="techOfficeDesc">Word, Excel, PowerPoint</p>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-md">
                     <span class="text-4xl">📧</span>
-                    <h4 class="font-bold text-xl mt-2 mb-1">Google Workspace</h4>
-                    <p class="text-slate-600">Gmail, Drive, Docs, Sheets, Slides</p>
+                    <h4 class="font-bold text-xl mt-2 mb-1" data-translate="techGoogle">Google Workspace</h4>
+                    <p class="text-slate-600" data-translate="techGoogleDesc">Gmail, Drive, Docs, Sheets, Slides</p>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-md">
                     <span class="text-4xl">🤖</span>
-                    <h4 class="font-bold text-xl mt-2 mb-1">IA y Prompts</h4>
-                    <p class="text-slate-600">Desarrollo de prompts para Chat GPT y Gemini</p>
+                    <h4 class="font-bold text-xl mt-2 mb-1" data-translate="techAI">IA y Prompts</h4>
+                    <p class="text-slate-600" data-translate="techAIDesc">Desarrollo de prompts para Chat GPT y Gemini</p>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-md">
                     <span class="text-4xl">🛒</span>
-                    <h4 class="font-bold text-xl mt-2 mb-1">Comercio Digital</h4>
-                    <p class="text-slate-600">Gestión de Mercado Libre, ERP Netsuite Oracle</p>
+                    <h4 class="font-bold text-xl mt-2 mb-1" data-translate="techEcomm">Comercio Digital</h4>
+                    <p class="text-slate-600" data-translate="techEcommDesc">Gestión de Mercado Libre, ERP Netsuite Oracle</p>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-md">
                     <span class="text-4xl">📈</span>
-                    <h4 class="font-bold text-xl mt-2 mb-1">Marketing Digital</h4>
-                    <p class="text-slate-600">Meta Ads, Google Ads, CRM (Emblue, Salesforce, Netsuite)</p>
+                    <h4 class="font-bold text-xl mt-2 mb-1" data-translate="techDigitalMkt">Marketing Digital</h4>
+                    <p class="text-slate-600" data-translate="techDigitalMktDesc">Meta Ads, Google Ads, CRM (Emblue, Salesforce, Netsuite)</p>
                 </div>
             </div>
         </section>
@@ -147,34 +148,34 @@
         <hr class="my-16 border-slate-200">
 
         <section id="experiencia">
-            <h3 class="text-3xl font-bold text-center mb-12">Experiencia Laboral</h3>
+            <h3 class="text-3xl font-bold text-center mb-12" data-translate="expTitle">Experiencia Laboral</h3>
             <div class="relative max-w-3xl mx-auto">
                 <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-slate-200"></div>
                 
                 <div class="timeline-item mb-12">
                     <div class="flex items-center">
                         <div class="flex-1 text-right pr-8">
-                            <h4 class="font-bold text-lg">HEAD OF MARKETING</h4>
-                            <p class="text-slate-600">Radio Sapienza</p>
+                            <h4 class="font-bold text-lg" data-translate="exp1Title">HEAD OF MARKETING</h4>
+                            <p class="text-slate-600" data-translate="exp1Company">Radio Sapienza</p>
                         </div>
                         <div class="w-8 h-8 bg-cyan-500 rounded-full z-10 flex items-center justify-center text-white font-bold">1</div>
                         <div class="flex-1 pl-8">
-                            <p class="text-slate-500 font-medium">Marzo 2025 - Actualidad</p>
+                            <p class="text-slate-500 font-medium" data-translate="exp1Date">Marzo 2025 - Actualidad</p>
                         </div>
                     </div>
                     <div class="text-center mt-2">
-                         <button class="toggle-details-btn text-cyan-600 hover:underline text-sm font-semibold">Ver detalles ▼</button>
+                        <button class="toggle-details-btn text-cyan-600 hover:underline text-sm font-semibold" data-translate="timelineShow">Ver detalles ▼</button>
                     </div>
                     <div class="timeline-item-content mt-4 max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md">
                         <ul class="list-disc list-inside text-slate-700 space-y-2">
-                            <li>Responsable de la imagen de marca en sucursales físicas y canales digitales.</li>
-                            <li>Liderazgo en la reestructuración de la cartelería y la implementación de una nueva señalética de precios.</li>
-                            <li>Definición e implementación de un circuito de experiencia del cliente y encuestas de salida.</li>
-                            <li>Realización de benchmarking de competencia para adaptar y mejorar estrategias.</li>
-                            <li>Medición y establecimiento de KPIs de posicionamiento de marca.</li>
-                            <li>Gestión del presupuesto de marketing interno y externo, incluyendo campañas comerciales.</li>
-                            <li>Coordinación de un equipo multidisciplinario con gerentes y equipos de diseño.</li>
-                            <li>Creación de campañas de marketing 360 para eventos clave del retail y liquidación de productos.</li>
+                            <li data-translate="exp1Li1">Responsable de la imagen de marca en sucursales físicas y canales digitales.</li>
+                            <li data-translate="exp1Li2">Liderazgo en la reestructuración de la cartelería y la implementación de una nueva señalética de precios.</li>
+                            <li data-translate="exp1Li3">Definición e implementación de un circuito de experiencia del cliente y encuestas de salida.</li>
+                            <li data-translate="exp1Li4">Realización de benchmarking de competencia para adaptar y mejorar estrategias.</li>
+                            <li data-translate="exp1Li5">Medición y establecimiento de KPIs de posicionamiento de marca.</li>
+                            <li data-translate="exp1Li6">Gestión del presupuesto de marketing interno y externo, incluyendo campañas comerciales.</li>
+                            <li data-translate="exp1Li7">Coordinación de un equipo multidisciplinario con gerentes y equipos de diseño.</li>
+                            <li data-translate="exp1Li8">Creación de campañas de marketing 360 para eventos clave del retail y liquidación de productos.</li>
                         </ul>
                     </div>
                 </div>
@@ -182,25 +183,25 @@
                 <div class="timeline-item mb-12">
                     <div class="flex items-center">
                         <div class="flex-1 text-right pr-8">
-                             <p class="text-slate-500 font-medium">Junio 2022 - Marzo 2025</p>
+                            <p class="text-slate-500 font-medium" data-translate="exp2Date">Junio 2022 - Marzo 2025</p>
                         </div>
                         <div class="w-8 h-8 bg-cyan-500 rounded-full z-10 flex items-center justify-center text-white font-bold">2</div>
                         <div class="flex-1 pl-8">
-                            <h4 class="font-bold text-lg">COORDINADORA DE MKT</h4>
-                            <p class="text-slate-600">Soca Argentina SA</p>
+                            <h4 class="font-bold text-lg" data-translate="exp2Title">COORDINADORA DE MKT</h4>
+                            <p class="text-slate-600" data-translate="exp2Company">Soca Argentina SA</p>
                         </div>
                     </div>
-                     <div class="text-center mt-2">
-                         <button class="toggle-details-btn text-cyan-600 hover:underline text-sm font-semibold">Ver detalles ▼</button>
+                      <div class="text-center mt-2">
+                         <button class="toggle-details-btn text-cyan-600 hover:underline text-sm font-semibold" data-translate="timelineShow">Ver detalles ▼</button>
                     </div>
                     <div class="timeline-item-content mt-4 max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md">
                         <ul class="list-disc list-inside text-slate-700 space-y-2">
-                            <li>Gestión de puntos de venta B2B y B2C, y planificación de eventos empresariales.</li>
-                            <li>Participación en el desarrollo de nuevas marcas y lanzamiento de productos.</li>
-                            <li>Análisis de KPIs de cartera de clientes y desarrollo de estrategias de marketing.</li>
-                            <li>Propuesta y ejecución de campañas en colaboración con el equipo comercial.</li>
-                            <li>Comunicación y coordinación estratégica con la agencia de Mercado Libre.</li>
-                            <li>Gestión y diseño de redes sociales, diseño web, y material publicitario.</li>
+                            <li data-translate="exp2Li1">Gestión de puntos de venta B2B y B2C, y planificación de eventos empresariales.</li>
+                            <li data-translate="exp2Li2">Participación en el desarrollo de nuevas marcas y lanzamiento de productos.</li>
+                            <li data-translate="exp2Li3">Análisis de KPIs de cartera de clientes y desarrollo de estrategias de marketing.</li>
+                            <li data-translate="exp2Li4">Propuesta y ejecución de campañas en colaboración con el equipo comercial.</li>
+                            <li data-translate="exp2Li5">Comunicación y coordinación estratégica con la agencia de Mercado Libre.</li>
+                            <li data-translate="exp2Li6">Gestión y diseño de redes sociales, diseño web, y material publicitario.</li>
                         </ul>
                     </div>
                 </div>
@@ -208,23 +209,23 @@
                 <div class="timeline-item">
                     <div class="flex items-center">
                         <div class="flex-1 text-right pr-8">
-                            <h4 class="font-bold text-lg">DISEÑADORA MULTIMEDIA</h4>
-                            <p class="text-slate-600">T3H</p>
+                            <h4 class="font-bold text-lg" data-translate="exp3Title">DISEÑADORA MULTIMEDIA</h4>
+                            <p class="text-slate-600" data-translate="exp3Company">T3H</p>
                         </div>
                         <div class="w-8 h-8 bg-cyan-500 rounded-full z-10 flex items-center justify-center text-white font-bold">3</div>
                         <div class="flex-1 pl-8">
-                            <p class="text-slate-500 font-medium">Mayo 2021 - Junio 2022</p>
+                            <p class="text-slate-500 font-medium" data-translate="exp3Date">Mayo 2021 - Junio 2022</p>
                         </div>
                     </div>
-                     <div class="text-center mt-2">
-                         <button class="toggle-details-btn text-cyan-600 hover:underline text-sm font-semibold">Ver detalles ▼</button>
+                      <div class="text-center mt-2">
+                         <button class="toggle-details-btn text-cyan-600 hover:underline text-sm font-semibold" data-translate="timelineShow">Ver detalles ▼</button>
                     </div>
                     <div class="timeline-item-content mt-4 max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md">
                         <ul class="list-disc list-inside text-slate-700 space-y-2">
-                            <li>Creación de Motion Graphics y banners web.</li>
-                            <li>Composición de Key Visuals para campañas de marketing.</li>
-                            <li>Desarrollo de piezas estáticas y animadas.</li>
-                            <li>Maquetación de campañas de mailing.</li>
+                            <li data-translate="exp3Li1">Creación de Motion Graphics y banners web.</li>
+                            <li data-translate="exp3Li2">Composición de Key Visuals para campañas de marketing.</li>
+                            <li data-translate="exp3Li3">Desarrollo de piezas estáticas y animadas.</li>
+                            <li data-translate="exp3Li4">Maquetación de campañas de mailing.</li>
                         </ul>
                     </div>
                 </div>
@@ -233,10 +234,11 @@
         <hr class="my-16 border-slate-200">
 
 <section id="portfolio" class="mb-16 md:mb-24">
-    <h3 class="text-3xl font-bold text-center mb-8">Portafolio Multimedia</h3>
-    <p class="text-center text-slate-500 mb-12">Proyectos destacados de Diseño Multimedial y Marketing.</p>
+    <h3 class="text-3xl font-bold text-center mb-8" data-translate="portfolioTitle">Portafolio Multimedia</h3>
+    <p class="text-center text-slate-500 mb-12" data-translate="portfolioSubtitle">Proyectos destacados de Diseño Multimedial y Marketing.</p>
     
     <div id="gallery-container" class="column-layout max-w-6xl mx-auto px-4">
+        
         <div class="gallery-item cursor-pointer mb-4 break-inside-avoid bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300"
      data-type="video" 
      data-src="./Matrix_BlackFriday_LeadAdd_1_1080X1080_1.mp4">
@@ -246,8 +248,8 @@
     </video>
     
     <div class="p-4">
-        <p class="font-semibold text-slate-800">Spot para Matrix - T3H</p>
-        <p class="text-sm text-slate-500">Diseño y Animación 2D</p>
+        <p class="font-semibold text-slate-800" data-translate="p1Title">Spot para Matrix - T3H</p>
+        <p class="text-sm text-slate-500" data-translate="p1Desc">Diseño y Animación 2D</p>
     </div>
 </div>
         <div class="gallery-item cursor-pointer mb-4 break-inside-avoid bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300" 
@@ -255,8 +257,8 @@
              data-src="./CeraVe_Junio_Organico_Posteo_Propuesta01B.png">
             <img src="./CeraVe_Junio_Organico_Posteo_Propuesta01B.png" alt="Diseño de Campaña" class="w-full rounded-t-xl">
             <div class="p-4">
-                <p class="font-semibold text-slate-800">Diseño de pieza IG para CeraVe T3H</p>
-                <p class="text-sm text-slate-500">Key Visuals y Banners</p>
+                <p class="font-semibold text-slate-800" data-translate="p2Title">Diseño de pieza IG para CeraVe T3H</p>
+                <p class="text-sm text-slate-500" data-translate="p2Desc">Key Visuals y Banners</p>
             </div>
         </div>
 <div class="gallery-item cursor-pointer mb-4 break-inside-avoid bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300"
@@ -268,8 +270,8 @@
     </video>
     
     <div class="p-4">
-        <p class="font-semibold text-slate-800">Spot para Salta Cautiva - T3H</p>
-        <p class="text-sm text-slate-500">Diseño y Animación 2D</p>
+        <p class="font-semibold text-slate-800" data-translate="p3Title">Spot para Salta Cautiva - T3H</p>
+        <p class="text-sm text-slate-500" data-translate="p3Desc">Diseño y Animación 2D</p>
     </div>
 </div>
         <div class="gallery-item cursor-pointer mb-4 break-inside-avoid bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300" 
@@ -277,8 +279,8 @@
              data-src="./Vichy_Liftactiv_Awareness_Banner_320x480.gif">
             <img src="./Vichy_Liftactiv_Awareness_Banner_320x480.gif" alt="Diseño de Campaña" class="w-full rounded-t-xl">
             <div class="p-4">
-                <p class="font-semibold text-slate-800">Diseño de banner web GIF para Vichy - T3H</p>
-                <p class="text-sm text-slate-500">Key Visuals y Banners</p>
+                <p class="font-semibold text-slate-800" data-translate="p4Title">Diseño de banner web GIF para Vichy - T3H</p>
+                <p class="text-sm text-slate-500" data-translate="p4Desc">Key Visuals y Banners</p>
             </div>
         </div>
         <div class="gallery-item cursor-pointer mb-4 break-inside-avoid bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300"
@@ -288,8 +290,8 @@
                 <source src="./MDetox_B2P_PreLaunch_LinkAd_2a.mp4" type="video/mp4">
             </video>
             <div class="p-4">
-                <p class="font-semibold text-slate-800">Motion Graphic: Intro de Producto para L'oreal - T3H</p>
-                <p class="text-sm text-slate-500">Realizado en After Effects</p>
+                <p class="font-semibold text-slate-800" data-translate="p5Title">Motion Graphic: Intro de Producto para L'oreal - T3H</p>
+                <p class="text-sm text-slate-500" data-translate="p5Desc">Realizado en After Effects</p>
             </div>
         </div>
         <div class="gallery-item cursor-pointer mb-4 break-inside-avoid bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300" 
@@ -297,8 +299,8 @@
              data-src="./LP_AO_Proshop_Post_1080x1080_06.png">
             <img src="./LP_AO_Proshop_Post_1080x1080_06.png" alt="Diseño de Campaña" class="w-full rounded-t-xl">
             <div class="p-4">
-                <p class="font-semibold text-slate-800">Diseño de piezas para redes de L'oreal - T3H</p>
-                <p class="text-sm text-slate-500">Key Visuals y Banners</p>
+                <p class="font-semibold text-slate-800" data-translate="p6Title">Diseño de piezas para redes de L'oreal - T3H</p>
+                <p class="text-sm text-slate-500" data-translate="p6Desc">Key Visuals y Banners</p>
             </div>
         </div>
 
@@ -307,8 +309,8 @@
              data-src="./KER_CM_Pauta_Carrusel_1080x1080_1.png">
             <img src="./KER_CM_Pauta_Carrusel_1080x1080_1.png" alt="Diseño de Campaña" class="w-full rounded-t-xl">
             <div class="p-4">
-                <p class="font-semibold text-slate-800">Diseño de piezas para redes de Kérastase - T3H</p>
-                <p class="text-sm text-slate-500">Key Visuals y Banners</p>
+                <p class="font-semibold text-slate-800" data-translate="p7Title">Diseño de piezas para redes de Kérastase - T3H</p>
+                <p class="text-sm text-slate-500" data-translate="p7Desc">Key Visuals y Banners</p>
             </div>
         </div>
         <div class="gallery-item cursor-pointer mb-4 break-inside-avoid bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300"
@@ -320,8 +322,8 @@
     </video>
     
     <div class="p-4">
-        <p class="font-semibold text-slate-800">Spot para Garnier - T3H</p>
-        <p class="text-sm text-slate-500">Diseño y Animación 2D - Affter Effects</p>
+        <p class="font-semibold text-slate-800" data-translate="p8Title">Spot para Garnier - T3H</p>
+        <p class="text-sm text-slate-500" data-translate="p8Desc">Diseño y Animación 2D - Affter Effects</p>
     </div>
 </div>
          <div class="gallery-item cursor-pointer mb-4 break-inside-avoid bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300" 
@@ -329,8 +331,8 @@
              data-src="./LP_Marzo_La Parfumerie_Banner_960x900px.jpg">
             <img src="./LP_Marzo_La Parfumerie_Banner_960x900px.jpg" alt="Diseño de Campaña" class="w-full rounded-t-xl">
             <div class="p-4">
-                <p class="font-semibold text-slate-800">Diseño de banners para Ecommerce de L'oreal - T3H</p>
-                <p class="text-sm text-slate-500">Key Visuals y Banners</p>
+                <p class="font-semibold text-slate-800" data-translate="p9Title">Diseño de banners para Ecommerce de L'oreal - T3H</p>
+                <p class="text-sm text-slate-500" data-translate="p9Desc">Key Visuals y Banners</p>
             </div>
         </div>
 
@@ -339,8 +341,8 @@
              data-src="./SC_Ecommerce_Mayo_AWO_Banner01.gif">
             <img src="./SC_Ecommerce_Mayo_AWO_Banner01.gif" alt="Diseño de Campaña" class="w-full rounded-t-xl">
             <div class="p-4">
-                <p class="font-semibold text-slate-800">Diseño de banners para Ecommerce de Salta Cautiva - T3H</p>
-                <p class="text-sm text-slate-500">Key Visuals y Banners</p>
+                <p class="font-semibold text-slate-800" data-translate="p10Title">Diseño de banners para Ecommerce de Salta Cautiva - T3H</p>
+                <p class="text-sm text-slate-500" data-translate="p10Desc">Key Visuals y Banners</p>
             </div>
         </div>
 
@@ -353,15 +355,15 @@
     </video>
     
     <div class="p-4">
-        <p class="font-semibold text-slate-800">Pieza para redes L'oreal - T3H</p>
-        <p class="text-sm text-slate-500">Diseño y Animación 2D - Affter Effects</p>
+        <p class="font-semibold text-slate-800" data-translate="p11Title">Pieza para redes L'oreal - T3H</p>
+        <p class="text-sm text-slate-500" data-translate="p11Desc">Diseño y Animación 2D - Affter Effects</p>
     </div>
 </div>
         
-        </div>
+    </div>
 
 <div class="text-center mt-12">
-        <a href="https://drive.google.com/drive/folders/1HcAtRuCGlflsDm3nRCZ1fqVicfapV7r8?usp=sharing" target="_blank" class="inline-block px-8 py-3 bg-cyan-500 text-white font-bold rounded-lg shadow-md hover:bg-red-700 transition duration-300">
+        <a href="https://drive.google.com/drive/folders/1HcAtRuCGlflsDm3nRCZ1fqVicfapV7r8?usp=drive_link" target="_blank" class="inline-block px-8 py-3 bg-cyan-500 text-white font-bold rounded-lg shadow-md hover:bg-red-700 transition duration-300" data-translate="portfolioViewMore">
             Ver más proyectos en Drive 📂
         </a>
     </div>
@@ -383,17 +385,17 @@
 <hr class="my-16 border-slate-200">
         
         <section id="educacion" class="text-center mb-16 md:mb-24">
-            <h3 class="text-3xl font-bold mb-8">Educación e Idiomas</h3>
+            <h3 class="text-3xl font-bold mb-8" data-translate="eduTitle">Educación e Idiomas</h3>
             <div class="flex flex-col md:flex-row justify-center items-center gap-8">
                 <div class="bg-white p-6 rounded-lg shadow-md w-full md:w-1/3">
-                    <h4 class="font-bold text-cyan-600 mb-2">DISEÑO MULTIMEDIAL</h4>
-                    <p class="text-slate-700">Escuela Da Vinci</p>
-                    <p class="text-sm text-slate-500">2017 - 2020</p>
+                    <h4 class="font-bold text-cyan-600 mb-2" data-translate="eduDegree">DISEÑO MULTIMEDIAL</h4>
+                    <p class="text-slate-700" data-translate="eduSchool">Escuela Da Vinci</p>
+                    <p class="text-sm text-slate-500" data-translate="eduDate">2017 - 2020</p>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-md w-full md:w-1/3">
-                    <h4 class="font-bold text-cyan-600 mb-2">INGLÉS</h4>
-                    <p class="text-slate-700">Intermedio Avanzado (B2)</p>
-                    <p class="text-sm text-slate-500">En proceso de certificación</p>
+                    <h4 class="font-bold text-cyan-600 mb-2" data-translate="eduLang">INGLÉS</h4>
+                    <p class="text-slate-700" data-translate="eduLangLevel">Intermedio Avanzado (B2)</p>
+                    <p class="text-sm text-slate-500" data-translate="eduLangStatus">En proceso de certificación</p>
                 </div>
             </div>
         </section>
@@ -401,194 +403,431 @@
 
     <footer class="text-white mt-20">
         <div class="container mx-auto px-6 py-8 text-center">
-            <h4 class="text-2xl font-bold mb-4">Contacto</h4>
+            <h4 class="text-2xl font-bold mb-4" data-translate="footerTitle">Contacto</h4>
             <p class="mb-2"><a href="https://wa.me/5491122964707">+54 9 11 2296 4707</a></p>
-            <p>melina17delrosario@gmail.com</p>
+            <p data-translate="footerEmail">melina17delrosario@gmail.com</p>
         </div>
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const ctx = document.getElementById('skillsChart').getContext('2d');
-            const skillsChart = new Chart(ctx, {
-                type: 'radar',
-                data: {
-                    labels: [
-                        'Estrategia de Marca', 
-                        'Liderazgo de Equipos', 
-                        'Gestión de Presupuestos', 
-                        'Análisis de KPI', 
-                        'Marketing Digital', 
-                        'Manejo de CRM', 
-                        'Diseño Gráfico',
-                        'Desarrollo de Prompts para IA'
-                    ],
-                    datasets: [{
-                        label: 'Nivel',
-                        data: [5, 4.8, 4.7, 5, 5, 4.7, 5, 4.7],
-                        backgroundColor: 'rgba(249, 182, 175, .5)',
-                        borderColor: 'rgba(150, 173, 214, 1)',
-                        pointBackgroundColor: 'rgba(0, 64, 140, 1)',
-                        pointBorderColor: '#fff',
-                        pointHoverBackgroundColor: '#fff',
-                        pointHoverBorderColor: 'rgba(14, 165, 233, 1)'
-                    }]
-                },
-                options: {
-                    maintainAspectRatio: false,
-                    responsive: true,
-                    scales: {
-                        r: {
-                            angleLines: {
-                                color: 'rgba(0, 0, 0, 0.1)'
-                            },
-                            grid: {
-                                color: 'rgba(0, 0, 0, 0.1)'
-                            },
-                            pointLabels: {
-                                font: {
-                                    size: 12,
-                                    weight: 'bold'
-                                },
-                                color: '#E85234'
-                            },
-                            ticks: {
-                                beginAtZero: true,
-                                max: 5,
-                                stepSize: 1,
-                                backdropColor: 'rgba(255, 255, 255, 0.75)',
-                                color: 'rgba(255, 255, 255, 0'
-                            }
-                        }
+// --- NUEVO: SISTEMA DE TRADUCCIÓN ---
+
+// 1. Diccionario de Traducciones
+const translations = {
+    es: {
+        // Nav
+        navExperience: "Experiencia",
+        navSkills: "Habilidades",
+        navPortfolio: "Portafolio",
+        navTech: "Conocimientos",
+        navEducation: "Educación",
+        // Hero
+        heroTitle: "Designer & Head of Marketing",
+        heroBio: "Profesional autónoma y comprometida, con una sólida experiencia en diseño y marketing. Mi enfoque se centra en la planificación y ejecución de estrategias que optimizan la imagen de marca y generan resultados comerciales tangibles. Poseo excelentes habilidades de comunicación y me destaco en el trabajo colaborativo, liderando equipos y coordinando proyectos para alcanzar los objetivos de la empresa.",
+        // Skills
+        skillsTitle: "Habilidades Clave",
+        skillsSubtitle: "Un vistazo a mis competencias principales en estrategia, gestión y ejecución.",
+        chartLabel: "Nivel",
+        chartLabels: ['Estrategia de Marca', 'Liderazgo de Equipos', 'Gestión de Presupuestos', 'Análisis de KPI', 'Marketing Digital', 'Manejo de CRM', 'Diseño Gráfico', 'Desarrollo de Prompts para IA'],
+        // Tech
+        techTitle: "Conocimientos Técnicos",
+        techAdobe: "Paquete Adobe",
+        techAdobeDesc: "Illustrator, Photoshop, After Effects, Premiere",
+        techOffice: "Paquete Office",
+        techOfficeDesc: "Word, Excel, PowerPoint",
+        techGoogle: "Google Workspace",
+        techGoogleDesc: "Gmail, Drive, Docs, Sheets, Slides",
+        techAI: "IA y Prompts",
+        techAIDesc: "Desarrollo de prompts para Chat GPT y Gemini",
+        techEcomm: "Comercio Digital",
+        techEcommDesc: "Gestión de Mercado Libre, ERP Netsuite Oracle",
+        techDigitalMkt: "Marketing Digital",
+        techDigitalMktDesc: "Meta Ads, Google Ads, CRM (Emblue, Salesforce, Netsuite)",
+        // Experience
+        expTitle: "Experiencia Laboral",
+        timelineShow: "Ver detalles ▼",
+        timelineHide: "Ocultar detalles ▲",
+        exp1Title: "HEAD OF MARKETING",
+        exp1Company: "Radio Sapienza",
+        exp1Date: "Marzo 2025 - Actualidad",
+        exp1Li1: "Responsable de la imagen de marca en sucursales físicas y canales digitales.",
+        exp1Li2: "Liderazgo en la reestructuración de la cartelería y la implementación de una nueva señalética de precios.",
+        exp1Li3: "Definición e implementación de un circuito de experiencia del cliente y encuestas de salida.",
+        exp1Li4: "Realización de benchmarking de competencia para adaptar y mejorar estrategias.",
+        exp1Li5: "Medición y establecimiento de KPIs de posicionamiento de marca.",
+        exp1Li6: "Gestión del presupuesto de marketing interno y externo, incluyendo campañas comerciales.",
+        exp1Li7: "Coordinación de un equipo multidisciplinario con gerentes y equipos de diseño.",
+        exp1Li8: "Creación de campañas de marketing 360 para eventos clave del retail y liquidación de productos.",
+        exp2Title: "COORDINADORA DE MKT",
+        exp2Company: "Soca Argentina SA",
+        exp2Date: "Junio 2022 - Marzo 2025",
+        exp2Li1: "Gestión de puntos de venta B2B y B2C, y planificación de eventos empresariales.",
+        exp2Li2: "Participación en el desarrollo de nuevas marcas y lanzamiento de productos.",
+        exp2Li3: "Análisis de KPIs de cartera de clientes y desarrollo de estrategias de marketing.",
+        exp2Li4: "Propuesta y ejecución de campañas en colaboración con el equipo comercial.",
+        exp2Li5: "Comunicación y coordinación estratégica con la agencia de Mercado Libre.",
+        exp2Li6: "Gestión y diseño de redes sociales, diseño web, y material publicitario.",
+        exp3Title: "DISEÑADORA MULTIMEDIA",
+        exp3Company: "T3H",
+        exp3Date: "Mayo 2021 - Junio 2022",
+        exp3Li1: "Creación de Motion Graphics y banners web.",
+        exp3Li2: "Composición de Key Visuals para campañas de marketing.",
+        exp3Li3: "Desarrollo de piezas estáticas y animadas.",
+        exp3Li4: "Maquetación de campañas de mailing.",
+        // Portfolio
+        portfolioTitle: "Portafolio Multimedia",
+        portfolioSubtitle: "Proyectos destacados de Diseño Multimedial y Marketing.",
+        p1Title: "Spot para Matrix - T3H",
+        p1Desc: "Diseño y Animación 2D",
+        p2Title: "Diseño de pieza IG para CeraVe T3H",
+        p2Desc: "Key Visuals y Banners",
+        p3Title: "Spot para Salta Cautiva - T3H",
+        p3Desc: "Diseño y Animación 2D",
+        p4Title: "Diseño de banner web GIF para Vichy - T3H",
+        p4Desc: "Key Visuals y Banners",
+        p5Title: "Motion Graphic: Intro de Producto para L'oreal - T3H",
+        p5Desc: "Realizado en After Effects",
+        p6Title: "Diseño de piezas para redes de L'oreal - T3H",
+        p6Desc: "Key Visuals y Banners",
+        p7Title: "Diseño de piezas para redes de Kérastase - T3H",
+        p7Desc: "Key Visuals y Banners",
+        p8Title: "Spot para Garnier - T3H",
+        p8Desc: "Diseño y Animación 2D - After Effects",
+        p9Title: "Diseño de banners para Ecommerce de L'oreal - T3H",
+        p9Desc: "Key Visuals y Banners",
+        p10Title: "Diseño de banners para Ecommerce de Salta Cautiva - T3H",
+        p10Desc: "Key Visuals y Banners",
+        p11Title: "Pieza para redes L'oreal - T3H",
+        p11Desc: "Diseño y Animación 2D - After Effects",
+        portfolioViewMore: "Ver más proyectos en Drive 📂",
+        // Education
+        eduTitle: "Educación e Idiomas",
+        eduDegree: "DISEÑO MULTIMEDIAL",
+        eduSchool: "Escuela Da Vinci",
+        eduDate: "2017 - 2020",
+        eduLang: "INGLÉS",
+        eduLangLevel: "Intermedio Avanzado (B2)",
+        eduLangStatus: "En proceso de certificación",
+        // Footer
+        footerTitle: "Contacto",
+        footerEmail: "melina17delrosario@gmail.com"
+    },
+    en: {
+        // Nav
+        navExperience: "Experience",
+        navSkills: "Skills",
+        navPortfolio: "Portfolio",
+        navTech: "Tech Skills",
+        navEducation: "Education",
+        // Hero
+        heroTitle: "Designer & Head of Marketing",
+        heroBio: "An autonomous and committed professional with solid experience in design and marketing. My focus is on planning and executing strategies that optimize brand image and generate tangible business results. I possess excellent communication skills and excel in collaborative work, leading teams, and coordinating projects to achieve company goals.",
+        // Skills
+        skillsTitle: "Key Skills",
+        skillsSubtitle: "A look at my core competencies in strategy, management, and execution.",
+        chartLabel: "Level",
+        chartLabels: ['Brand Strategy', 'Team Leadership', 'Budget Management', 'KPI Analysis', 'Digital Marketing', 'CRM Management', 'Graphic Design', 'AI Prompt Development'],
+        // Tech
+        techTitle: "Technical Knowledge",
+        techAdobe: "Adobe Suite",
+        techAdobeDesc: "Illustrator, Photoshop, After Effects, Premiere",
+        techOffice: "Office Suite",
+        techOfficeDesc: "Word, Excel, PowerPoint",
+        techGoogle: "Google Workspace",
+        techGoogleDesc: "Gmail, Drive, Docs, Sheets, Slides",
+        techAI: "AI & Prompts",
+        techAIDesc: "Prompt development for Chat GPT and Gemini",
+        techEcomm: "Digital Commerce",
+        techEcommDesc: "Mercado Libre Management, ERP Netsuite Oracle",
+        techDigitalMkt: "Digital Marketing",
+        techDigitalMktDesc: "Meta Ads, Google Ads, CRM (Emblue, Salesforce, Netsuite)",
+        // Experience
+        expTitle: "Work Experience",
+        timelineShow: "Show details ▼",
+        timelineHide: "Hide details ▲",
+        exp1Title: "HEAD OF MARKETING",
+        exp1Company: "Radio Sapienza",
+        exp1Date: "March 2025 - Present",
+        exp1Li1: "Responsible for brand image in physical branches and digital channels.",
+        exp1Li2: "Leadership in restructuring signage and implementing new price signaling.",
+        exp1Li3: "Definition and implementation of a customer experience circuit and exit surveys.",
+        exp1Li4: "Conducting competitor benchmarking to adapt and improve strategies.",
+        exp1Li5: "Measurement and establishment of brand positioning KPIs.",
+        exp1Li6: "Management of internal and external marketing budgets, including commercial campaigns.",
+        exp1Li7: "Coordination of a multidisciplinary team with managers and design teams.",
+        exp1Li8: "Creation of 360 marketing campaigns for key retail events and product liquidations.",
+        exp2Title: "MARKETING COORDINATOR",
+        exp2Company: "Soca Argentina SA",
+        exp2Date: "June 2022 - March 2025",
+        exp2Li1: "Management of B2B and B2C points of sale, and planning of corporate events.",
+        exp2Li2: "Participation in the development of new brands and product launches.",
+        exp2Li3: "Analysis of client portfolio KPIs and development of marketing strategies.",
+        exp2Li4: "Proposal and execution of campaigns in collaboration with the commercial team.",
+        exp2Li5: "Strategic communication and coordination with the Mercado Libre agency.",
+        exp2Li6: "Management and design of social media, web design, and advertising materials.",
+        exp3Title: "MULTIMEDIA DESIGNER",
+        exp3Company: "T3H",
+        exp3Date: "May 2021 - June 2022",
+        exp3Li1: "Creation of Motion Graphics and web banners.",
+        exp3Li2: "Composition of Key Visuals for marketing campaigns.",
+        exp3Li3: "Development of static and animated pieces.",
+        exp3Li4: "Layout of mailing campaigns.",
+        // Portfolio
+        portfolioTitle: "Multimedia Portfolio",
+        portfolioSubtitle: "Featured projects in Multimedia Design and Marketing.",
+        p1Title: "Spot for Matrix - T3H",
+        p1Desc: "2D Design and Animation",
+        p2Title: "IG post design for CeraVe - T3H",
+        p2Desc: "Key Visuals and Banners",
+        p3Title: "Spot for Salta Cautiva - T3H",
+        p3Desc: "2D Design and Animation",
+        p4Title: "GIF web banner design for Vichy - T3H",
+        p4Desc: "Key Visuals and Banners",
+        p5Title: "Motion Graphic: Product Intro for L'oreal - T3H",
+        p5Desc: "Made in After Effects",
+        p6Title: "Social media post design for L'oreal - T3H",
+        p6Desc: "Key Visuals and Banners",
+        p7Title: "Social media post design for Kérastase - T3H",
+        p7Desc: "Key Visuals and Banners",
+        p8Title: "Spot for Garnier - T3H",
+        p8Desc: "2D Design and Animation - After Effects",
+        p9Title: "E-commerce banner design for L'oreal - T3H",
+        p9Desc: "Key Visuals and Banners",
+        p10Title: "E-commerce banner design for Salta Cautiva - T3H",
+        p10Desc: "Key Visuals and Banners",
+        p11Title: "Social media post for L'oreal - T3H",
+        p11Desc: "2D Design and Animation - After Effects",
+        portfolioViewMore: "View more projects on Drive 📂",
+        // Education
+        eduTitle: "Education & Languages",
+        eduDegree: "MULTIMEDIA DESIGN DEGREE",
+        eduSchool: "Escuela Da Vinci",
+        eduDate: "2017 - 2020",
+        eduLang: "ENGLISH",
+        eduLangLevel: "Upper Intermediate (B2)",
+        eduLangStatus: "Certification in progress",
+        // Footer
+        footerTitle: "Contact",
+        footerEmail: "melina17delrosario@gmail.com"
+    }
+};
+
+// 2. Variables Globales
+let currentLang = 'es';
+let skillsChartInstance = null;
+const langButtons = document.querySelectorAll('#lang-switcher button');
+const allToggleButtons = document.querySelectorAll('.toggle-details-btn');
+
+// 3. Función para renderizar el Gráfico
+function renderChart(lang) {
+    if (skillsChartInstance) {
+        skillsChartInstance.destroy(); // Destruir el gráfico anterior si existe
+    }
+    const ctx = document.getElementById('skillsChart').getContext('2d');
+    skillsChartInstance = new Chart(ctx, {
+        type: 'radar',
+        data: {
+            labels: translations[lang].chartLabels, // Labels dinámicos
+            datasets: [{
+                label: translations[lang].chartLabel, // Label dinámico
+                data: [5, 4.8, 4.7, 5, 5, 4.7, 5, 4.7],
+                backgroundColor: 'rgba(249, 182, 175, .5)',
+                borderColor: 'rgba(150, 173, 214, 1)',
+                pointBackgroundColor: 'rgba(0, 64, 140, 1)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(14, 165, 233, 1)'
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            responsive: true,
+            scales: {
+                r: {
+                    angleLines: { color: 'rgba(0, 0, 0, 0.1)' },
+                    grid: { color: 'rgba(0, 0, 0, 0.1)' },
+                    pointLabels: {
+                        font: { size: 12, weight: 'bold' },
+                        color: '#E85234'
                     },
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
+                    ticks: {
+                        beginAtZero: true,
+                        max: 5,
+                        stepSize: 1,
+                        backdropColor: 'rgba(255, 255, 255, 0.75)',
+                        color: 'rgba(255, 255, 255, 0'
                     }
                 }
-            });
-
-            const toggleButtons = document.querySelectorAll('.toggle-details-btn');
-            toggleButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const content = button.parentElement.nextElementSibling;
-                    const isOpening = !content.classList.contains('open');
-                    
-                    document.querySelectorAll('.timeline-item-content.open').forEach(openContent => {
-                        openContent.classList.remove('open');
-                        const openButton = openContent.previousElementSibling.querySelector('.toggle-details-btn');
-                        openButton.textContent = 'Ver detalles ▼';
-                    });
-
-                    if (isOpening) {
-                        content.classList.add('open');
-                        button.textContent = 'Ocultar detalles ▲';
-                    } else {
-                         button.textContent = 'Ver detalles ▼';
-                    }
-                });
-            });
-        /* --- Funcionalidad de Portafolio Interactivo --- */
-const modalContainer = document.getElementById('modal-container');
-const modalCloseBtn = document.getElementById('modal-close');
-const modalBody = document.getElementById('modal-body');
-const galleryItems = document.querySelectorAll('.gallery-item');
-
-// Función para abrir el modal
-function openModal(type, src, videoId) {
-    modalBody.innerHTML = ''; // Limpiar contenido anterior
-    let contentHTML = '';
-
-    if (type === 'image') {
-        contentHTML = `<img src="${src}" alt="Portafolio item" class="w-full h-auto object-contain">`;
-    } else if (type === 'video') {
-        // Para videos subidos: Usar la etiqueta <video> y forzar el autoplay
-        contentHTML = `
-            <video controls autoplay loop class="w-full max-h-[90vh]">
-                <source src="${src}" type="video/mp4">
-                Tu navegador no soporta el tag de video.
-            </video>`;
-    } else if (type === 'youtube') {
-        // Para videos de YouTube: Usar iframe con autoplay
-        contentHTML = `
-            <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-                <iframe 
-                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
-                    src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen>
-                </iframe>
-            </div>`;
-    }
-    
-    modalBody.innerHTML = contentHTML;
-    modalContainer.classList.remove('opacity-0', 'pointer-events-none');
-    document.body.style.overflow = 'hidden'; // Evita el scroll del fondo
-}
-
-// Función para cerrar el modal
-function closeModal() {
-    modalContainer.classList.add('opacity-0', 'pointer-events-none');
-    modalBody.innerHTML = ''; // Detiene la reproducción al vaciar
-    document.body.style.overflow = '';
-}
-
-// Eventos de Click para Abrir Modal
-galleryItems.forEach(item => {
-    item.addEventListener('click', () => {
-        const type = item.getAttribute('data-type');
-        const src = item.getAttribute('data-src');
-        // Extrae el ID de YouTube si es necesario
-        const videoId = item.getAttribute('data-id'); 
-        
-        openModal(type, src, videoId);
+            },
+            plugins: {
+                legend: { display: false }
+            }
+        }
     });
-});
+}
 
-// Eventos de Hover para Video (Autoplay/Pause solo para archivos subidos)
-galleryItems.forEach(item => {
-    const videoElement = item.querySelector('video');
-    if (videoElement) {
-        item.addEventListener('mouseenter', () => {
-            videoElement.play().catch(e => console.log('Autoplay blocked:', e));
-        });
-        item.addEventListener('mouseleave', () => {
-            videoElement.pause();
-            videoElement.currentTime = 0; // Opcional: Reinicia el video
-        });
+// 4. Función para cambiar el idioma
+function setLanguage(lang) {
+    if (!translations[lang]) return; // Salir si el idioma no existe
+    
+    currentLang = lang;
+    localStorage.setItem('preferredLang', lang);
+    document.documentElement.lang = lang;
+
+    // Actualizar botones de idioma
+    langButtons.forEach(btn => {
+        if (btn.getAttribute('data-lang') === lang) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+
+    // Traducir todos los elementos con [data-translate]
+    document.querySelectorAll('[data-translate]').forEach(el => {
+        const key = el.getAttribute('data-translate');
+        if (translations[lang][key]) {
+            el.textContent = translations[lang][key];
+        }
+    });
+
+    // Re-renderizar el gráfico con el nuevo idioma
+    renderChart(lang);
+}
+
+// 5. Función para obtener el idioma guardado o por defecto
+function getLanguage() {
+    const savedLang = localStorage.getItem('preferredLang');
+    if (savedLang && translations[savedLang]) {
+        return savedLang;
     }
-});
+    // Opcional: detectar idioma del navegador
+    // const browserLang = navigator.language.split('-')[0];
+    // if (translations[browserLang]) {
+    //     return browserLang;
+    // }
+    return 'es'; // Default
+}
 
 
-// Eventos para Cerrar Modal
-modalCloseBtn.addEventListener('click', closeModal);
-modalContainer.addEventListener('click', (e) => {
-    if (e.target.id === 'modal-container' || e.target.id === 'modal-content') {
-        closeModal();
-    }
-});
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && !modalContainer.classList.contains('opacity-0')) {
-        closeModal();
-    }
-});
+// --- CÓDIGO ORIGINAL (MODIFICADO LIGERAMENTE) ---
+
+document.addEventListener('DOMContentLoaded', function () {
+    
+    // --- Lógica de Timeline (Modificada para usar traducciones) ---
+    const toggleButtons = document.querySelectorAll('.toggle-details-btn');
+    toggleButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const content = button.parentElement.nextElementSibling;
+            const isOpening = !content.classList.contains('open');
+            
+            // Cerrar todos los demás
+            document.querySelectorAll('.timeline-item-content.open').forEach(openContent => {
+                openContent.classList.remove('open');
+                const openButton = openContent.previousElementSibling.querySelector('.toggle-details-btn');
+                openButton.textContent = translations[currentLang].timelineShow; // Usar traducción
+            });
+
+            // Abrir/Cerrar el actual
+            if (isOpening) {
+                content.classList.add('open');
+                button.textContent = translations[currentLang].timelineHide; // Usar traducción
+            } else {
+                 button.textContent = translations[currentLang].timelineShow; // Usar traducción
+            }
         });
+    });
+
+    /* --- Funcionalidad de Portafolio Interactivo (Sin cambios) --- */
+    const modalContainer = document.getElementById('modal-container');
+    const modalCloseBtn = document.getElementById('modal-close');
+    const modalBody = document.getElementById('modal-body');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+
+    function openModal(type, src, videoId) {
+        modalBody.innerHTML = ''; 
+        let contentHTML = '';
+
+        if (type === 'image') {
+            contentHTML = `<img src="${src}" alt="Portafolio item" class="w-full h-auto object-contain">`;
+        } else if (type === 'video') {
+            contentHTML = `
+                <video controls autoplay loop class="w-full max-h-[90vh]">
+                    <source src="${src}" type="video/mp4">
+                    Tu navegador no soporta el tag de video.
+                </video>`;
+        } else if (type === 'youtube') {
+            contentHTML = `
+                <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                    <iframe 
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
+                        src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>`;
+        }
+        
+        modalBody.innerHTML = contentHTML;
+        modalContainer.classList.remove('opacity-0', 'pointer-events-none');
+        document.body.style.overflow = 'hidden'; 
+    }
+
+    function closeModal() {
+        modalContainer.classList.add('opacity-0', 'pointer-events-none');
+        modalBody.innerHTML = ''; 
+        document.body.style.overflow = '';
+    }
+
+    galleryItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const type = item.getAttribute('data-type');
+            const src = item.getAttribute('data-src');
+            const videoId = item.getAttribute('data-id'); 
+            
+            openModal(type, src, videoId);
+        });
+    });
+
+    galleryItems.forEach(item => {
+        const videoElement = item.querySelector('video');
+        if (videoElement) {
+            item.addEventListener('mouseenter', () => {
+                videoElement.play().catch(e => console.log('Autoplay blocked:', e));
+            });
+            item.addEventListener('mouseleave', () => {
+                videoElement.pause();
+                videoElement.currentTime = 0;
+            });
+        }
+    });
+
+    modalCloseBtn.addEventListener('click', closeModal);
+    modalContainer.addEventListener('click', (e) => {
+        if (e.target.id === 'modal-container' || e.target.id === 'modal-content') {
+            closeModal();
+        }
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modalContainer.classList.contains('opacity-0')) {
+            closeModal();
+        }
+    });
+
+    // --- NUEVO: Inicialización del Idioma ---
+    
+    // Añadir listeners a los botones de idioma
+    langButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            setLanguage(button.getAttribute('data-lang'));
+        });
+    });
+
+    // Cargar la página con el idioma guardado o por defecto
+    setLanguage(getLanguage());
+
+});
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
